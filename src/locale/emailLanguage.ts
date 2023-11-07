@@ -14,3 +14,10 @@ export const getEmailContent = {
         </body>
       </html>`,
 };
+
+export const getEmailSubject = (websiteName: string) => {
+  return {
+    es: `${websiteName} - formulario de contacto`,
+    en: `${websiteName} - contact form`,
+  };
+};

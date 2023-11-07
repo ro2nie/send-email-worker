@@ -1,13 +1,16 @@
-import { getEmailContent } from 'locale/emailLanguage';
+import { getEmailContent, getEmailSubject } from 'locale/emailLanguage';
 import { sendTransactionalEmail } from 'lib/brevo/sendTransactionalEmail';
 import { ContactBuilder } from 'lib/brevo/types/contact';
 import { TransactionalEmailBodyBuilder } from 'lib/brevo/types/transactionalEmailBody';
-import { Email } from 'types';
+import { EmailDto } from 'types';
 
-export const constructEmail = async (emailToSend: Email, env: any) => {
+export const sendEmail = async (
+  emailToSend: EmailDto,
+  env: any
+): Promise<Response> => {
   return await sendTransactionalEmail(
     new TransactionalEmailBodyBuilder()
-      .setSubject(env.websiteName ?? 'website')
+      .setSubject(getEmailSubject(env.websiteName)[env.language] ?? 'website')
       .setSender(
         new ContactBuilder()
           .setName(emailToSend.name)
@@ -27,6 +30,13 @@ export const constructEmail = async (emailToSend: Email, env: any) => {
         customerEmailBody: emailToSend.body,
       })
       .setHtmlContent(getEmailContent[env.language] ?? 'Error')
-      .build()
+      .build(),
+    env
   );
+};
+
+export const validateEmail = (emailToSend: EmailDto) => {
+  if (emailToSend.email != emailToSend.verifyEmail) {
+    throw new Error('Email addresses do not match');
+  }
 };

@@ -2,10 +2,11 @@ import {
   OpenAPIRoute,
   OpenAPIRouteSchema,
 } from '@cloudflare/itty-router-openapi';
-import { Email, EmailDetails } from '../types';
+import { EmailDto, EmailDetails } from '../types';
 import { sendTransactionalEmail } from 'lib/brevo/sendTransactionalEmail';
 import { TransactionalEmailBodyBuilder } from 'lib/brevo/types/transactionalEmailBody';
 import { ContactBuilder } from 'lib/brevo/types/contact';
+import { sendEmail, validateEmail } from 'use-case/sendEmail';
 
 export class SendEmail extends OpenAPIRoute {
   static schema: OpenAPIRouteSchema = {
@@ -18,7 +19,7 @@ export class SendEmail extends OpenAPIRoute {
         schema: {
           success: Boolean,
           result: {
-            task: EmailDetails,
+            email: EmailDetails,
           },
         },
       },
@@ -31,22 +32,36 @@ export class SendEmail extends OpenAPIRoute {
     context: any,
     data: Record<string, any>
   ) {
-    // Retrieve the validated request body
+    const emailToSend = <EmailDto>data.body;
 
-    const emailToSend = <Email>data.body;
+    try {
+      validateEmail(emailToSend);
+    } catch (err) {
+      return Response.json(
+        {
+          errors: [
+            {
+              validation: 'email',
+              code: 'invalid_string',
+              message: err.message,
+              path: ['body', 'email '],
+            },
+          ],
+          success: false,
+          result: {},
+        },
+        { status: 400 }
+      );
+    }
 
-    // Implement your own object insertion here
+    await sendEmail(emailToSend, env);
 
-    
-    /** 
-	 
-	  
-	 */
-
-    // return the new task
-    return {
-      success: true,
-      email: emailToSend,
-    };
+    return Response.json(
+      {
+        success: true,
+        email: emailToSend,
+      },
+      { status: 200 }
+    );
   }
 }

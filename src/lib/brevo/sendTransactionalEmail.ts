@@ -17,17 +17,22 @@ async function gatherResponse(response) {
 }
 
 export const sendTransactionalEmail = async (
-  transactionalEmailBody: TransactionalEmailBody
-) => {
+  transactionalEmailBody: TransactionalEmailBody,
+  env: any
+): Promise<Response> => {
   const init = {
     body: JSON.stringify(transactionalEmailBody),
     method: 'POST',
     headers: {
       'content-type': 'application/json;charset=UTF-8',
+      'api-key': env.brevo,
     },
   };
 
+  console.log('This is the request sent to brevo', init);
+
   const response = await fetch(url, init);
+  console.log('RESPONSE', JSON.stringify(response));
   const results = await gatherResponse(response);
   return new Response(results, init);
 };

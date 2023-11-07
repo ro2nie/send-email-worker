@@ -1,4 +1,4 @@
-import { DateTime, Str } from '@cloudflare/itty-router-openapi';
+import { DateTime, Str, Email } from '@cloudflare/itty-router-openapi';
 
 export const Task = {
   name: new Str({ example: 'lorem' }),
@@ -8,15 +8,20 @@ export const Task = {
   due_date: new DateTime(),
 };
 
-export interface Email {
+export interface EmailDto {
   name: string;
   email: string;
+  verifyEmail: string;
   body: string;
   dateSent: string;
 }
 
-export const EmailDetails = <Email>{
-  name: new Str({ example: 'lorem', required: true }),
-  email: new Str({ example: 'john.appleseed@example.com', required: true }),
+export const EmailDetails = <EmailDto>{
+  name: new Str({ example: 'John Appleseed', required: true }),
+  email: new Email({ example: 'john.appleseed@example.com', required: true }),
+  verifyEmail: new Email({
+    example: 'john.appleseed@example.com',
+    required: true,
+  }),
   body: new Str({ required: true }),
 };
