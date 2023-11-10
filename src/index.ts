@@ -1,20 +1,14 @@
 import { OpenAPIRouter } from '@cloudflare/itty-router-openapi';
-import { TaskList } from './endpoints/taskList';
-import { TaskCreate } from './endpoints/taskCreate';
-import { TaskFetch } from './endpoints/taskFetch';
-import { TaskDelete } from './endpoints/taskDelete';
 import { SendEmail } from 'endpoints/sendEmail';
 
 export const router = OpenAPIRouter({
   docs_url: '/',
+  //this should be added to the routes in cf dashboard ie: ronnie.dev/heberinelca/*
+  //without a base, then mapping a worker to a route is impossible. Use this to map to sub path in website
+  base: '/:websiteName',
 });
 
 router.post('/api/send/', SendEmail);
-
-router.get('/api/tasks/', TaskList);
-router.post('/api/tasks/', TaskCreate);
-router.get('/api/tasks/:taskSlug/', TaskFetch);
-router.delete('/api/tasks/:taskSlug/', TaskDelete);
 
 // 404 for everything else
 router.all('*', () =>

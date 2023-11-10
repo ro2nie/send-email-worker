@@ -2,15 +2,18 @@ import { getEmailContent, getEmailSubject } from 'locale/emailLanguage';
 import { sendTransactionalEmail } from 'lib/brevo/sendTransactionalEmail';
 import { ContactBuilder } from 'lib/brevo/types/contact';
 import { TransactionalEmailBodyBuilder } from 'lib/brevo/types/transactionalEmailBody';
-import { EmailDto } from 'types';
+import { EmailDto, WebsiteDetails } from 'types';
 
 export const sendEmail = async (
   emailToSend: EmailDto,
-  env: any
+  websiteDetails: WebsiteDetails
 ): Promise<Response> => {
   return await sendTransactionalEmail(
     new TransactionalEmailBodyBuilder()
-      .setSubject(getEmailSubject(env.websiteName)[env.language] ?? 'website')
+      .setSubject(
+        getEmailSubject(websiteDetails.websiteName)[websiteDetails.language] ??
+          'website'
+      )
       .setSender(
         new ContactBuilder()
           .setName(emailToSend.name)
@@ -19,19 +22,19 @@ export const sendEmail = async (
       )
       .setTo([
         new ContactBuilder()
-          .setName(env.websiteOwnerName)
-          .setEmail(env.recipientEmail)
+          .setName(websiteDetails.websiteOwnerName)
+          .setEmail(websiteDetails.recipientEmail)
           .build(),
       ])
       .setParams({
-        websiteOwnerName: env.websiteOwnerName,
+        websiteOwnerName: websiteDetails.websiteOwnerName,
         customerName: emailToSend.name,
         customerEmailAddress: emailToSend.email,
         customerEmailBody: emailToSend.body,
       })
-      .setHtmlContent(getEmailContent[env.language] ?? 'Error')
+      .setHtmlContent(getEmailContent[websiteDetails.language] ?? 'Error')
       .build(),
-    env
+    websiteDetails
   );
 };
 

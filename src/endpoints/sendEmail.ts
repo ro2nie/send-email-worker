@@ -3,10 +3,8 @@ import {
   OpenAPIRouteSchema,
 } from '@cloudflare/itty-router-openapi';
 import { EmailDto, EmailDetails } from '../types';
-import { sendTransactionalEmail } from 'lib/brevo/sendTransactionalEmail';
-import { TransactionalEmailBodyBuilder } from 'lib/brevo/types/transactionalEmailBody';
-import { ContactBuilder } from 'lib/brevo/types/contact';
 import { sendEmail, validateEmail } from 'use-case/sendEmail';
+import { getWebsiteDetails } from 'use-case/getWebsiteDetails';
 
 export class SendEmail extends OpenAPIRoute {
   static schema: OpenAPIRouteSchema = {
@@ -54,14 +52,41 @@ export class SendEmail extends OpenAPIRoute {
       );
     }
 
-    await sendEmail(emailToSend, env);
+    const { pathname } = new URL(request.url);
+    const websiteName = pathname.split('/')[1];
 
-    return Response.json(
-      {
-        success: true,
-        email: emailToSend,
-      },
-      { status: 200 }
-    );
+    if (!websiteName) {
+      return Response.json(
+        {
+          errors: [{ message: 'website name not provided' }],
+          success: false,
+          result: {},
+        },
+        { status: 400 }
+      );
+    }
+
+    const websiteDetails = getWebsiteDetails(env, websiteName);
+
+    try {
+      await sendEmail(emailToSend, websiteDetails);
+
+      return Response.json(
+        {
+          success: true,
+          email: emailToSend,
+        },
+        { status: 200 }
+      );
+    } catch (err) {
+      return Response.json(
+        {
+          errors: [{ message: err.message }],
+          success: false,
+          result: {},
+        },
+        { status: 500 }
+      );
+    }
   }
 }

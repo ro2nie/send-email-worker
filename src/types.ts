@@ -1,12 +1,4 @@
-import { DateTime, Str, Email } from '@cloudflare/itty-router-openapi';
-
-export const Task = {
-  name: new Str({ example: 'lorem' }),
-  slug: String,
-  description: new Str({ required: false }),
-  completed: Boolean,
-  due_date: new DateTime(),
-};
+import { Str, Email } from '@cloudflare/itty-router-openapi';
 
 export interface EmailDto {
   name: string;
@@ -25,3 +17,10 @@ export const EmailDetails = <EmailDto>{
   }),
   body: new Str({ required: true }),
 };
+
+export interface WebsiteDetails {
+  websiteName: string;
+  websiteOwnerName: string;
+  recipientEmail: string;
+  language: 'en' | 'es';
+}
