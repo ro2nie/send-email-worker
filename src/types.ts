@@ -16,8 +16,10 @@ export const EmailDetails = <EmailDto>{
     example: 'john.appleseed@example.com',
     required: true,
   }),
-  phone: new Regex({ pattern: /^[\d\s+]{4,20}$/ }),
-  body: new Regex({ pattern: /^[\d\s\p{Letter}\p{Mark}]{4,1000}$/gu }),
+  phone: new Regex({ pattern: /^[\-\d\s+]{4,20}$/ }),
+  body: new Regex({
+    pattern: /^[.:,?¿!¡\-_\d\s\p{Letter}\p{Mark}]{4,1000}$/gu,
+  }),
 };
 
 export interface WebsiteDetails {
