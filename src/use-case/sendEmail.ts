@@ -18,6 +18,7 @@ export const sendEmail = async (
         new ContactBuilder()
           .setName(emailToSend.name)
           .setEmail(emailToSend.email)
+          .setPhone(emailToSend.phone)
           .build()
       )
       .setTo([
@@ -31,6 +32,17 @@ export const sendEmail = async (
         customerName: emailToSend.name,
         customerEmailAddress: emailToSend.email,
         customerEmailBody: emailToSend.body,
+        phoneNumber: emailToSend.phone,
+        dateTime: new Date().toLocaleDateString(websiteDetails.language, {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          timeZoneName: 'longGeneric',
+          timeZone: websiteDetails.timeZone,
+        }),
       })
       .setHtmlContent(getEmailContent[websiteDetails.language] ?? 'Error')
       .build(),
