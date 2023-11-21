@@ -6,6 +6,7 @@ export interface EmailDto {
   verifyEmail: string;
   phone: string;
   body: string;
+  turnstileToken: string;
   dateSent: string;
 }
 
@@ -20,6 +21,7 @@ export const EmailDetails = <EmailDto>{
   body: new Regex({
     pattern: /^[.:,?¿!¡\-_\d\s\p{Letter}\p{Mark}]{4,1000}$/gu,
   }),
+  turnstileToken: new Str({ example: 'abc123', required: false }),
 };
 
 export interface WebsiteDetails {
@@ -27,5 +29,17 @@ export interface WebsiteDetails {
   websiteOwnerName: string;
   recipientEmail: string;
   language: 'en-GB' | 'es-ES';
+  turnstileSecret: string;
   timeZone: string;
+}
+
+export interface SiteVerifyResponse {
+  success: boolean;
+  'error-codes': string[];
+  challenge_ts: string;
+  hostname: string;
+}
+
+export interface BrevoResponse {
+  messageId: string;
 }

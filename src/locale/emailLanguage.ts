@@ -1,10 +1,10 @@
 export const getEmailContent = {
   'es-ES': `<html>
         <body>
-          <h1>Hello {{params.websiteOwnerName}}</h1>
+          <h1>Hola {{params.websiteOwnerName}}</h1>
           <p>Has recibido un nuevo mensaje</p>
           <p>Message de: {{params.customerName}}
-          <p>Móvil/Teléfono: {{params.phoneNumber}}</p>          
+          <p>Móvil/Teléfono: <a href="tel:{{params.phoneNumber}}">{{params.phoneNumber}}</a></p>
           <p>Enviado el: {{params.dateTime}}.</p>
           <p>Mensaje:</p>
           <p>{{params.customerEmailBody}}</p>
@@ -15,7 +15,7 @@ export const getEmailContent = {
           <h1>Hello {{params.websiteOwnerName}}</h1>
           <p>You have received a new message</p>
           <p>Message from: {{params.customerName}}
-          <p>Phone number: {{params.phoneNumber}}</p>          
+          <p>Phone number: <a href="tel:{{params.phoneNumber}}">{{params.phoneNumber}}</a></p>
           <p>Sent on {{params.dateTime}}.</p>
           <p>Message:</p>
           <p>{{params.customerEmailBody}}</p>

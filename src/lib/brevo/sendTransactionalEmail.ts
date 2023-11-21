@@ -1,6 +1,5 @@
+import { BREVO_TRANSACTIONAL_EMAIL_URL } from 'finals';
 import { TransactionalEmailBody } from './types/transactionalEmailBody';
-
-const url = 'https://api.brevo.com/v3/smtp/email';
 
 async function gatherResponse(response) {
   const { headers } = response;
@@ -28,11 +27,8 @@ export const sendTransactionalEmail = async (
       'api-key': env.brevo,
     },
   };
+  const response = await fetch(BREVO_TRANSACTIONAL_EMAIL_URL, init);
 
-  console.log('This is the request sent to brevo', init);
-
-  const response = await fetch(url, init);
-  console.log('RESPONSE', JSON.stringify(response));
   const results = await gatherResponse(response);
   return new Response(results, init);
 };

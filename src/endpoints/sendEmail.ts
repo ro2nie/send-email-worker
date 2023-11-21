@@ -2,9 +2,10 @@ import {
   OpenAPIRoute,
   OpenAPIRouteSchema,
 } from '@cloudflare/itty-router-openapi';
-import { EmailDto, EmailDetails } from '../types';
+import { EmailDto, EmailDetails, BrevoResponse } from '../types';
 import { sendEmail, validateEmail } from 'use-case/sendEmail';
 import { getWebsiteDetails } from 'use-case/getWebsiteDetails';
+import { verifyTurnstileToken } from 'use-case/verifyTurnstileToken';
 
 export class SendEmail extends OpenAPIRoute {
   static schema: OpenAPIRouteSchema = {
@@ -69,7 +70,23 @@ export class SendEmail extends OpenAPIRoute {
     const websiteDetails = getWebsiteDetails(env, websiteName);
 
     try {
-      await sendEmail(emailToSend, websiteDetails);
+      const ip = request.headers.get('CF-Connecting-IP');
+      const turnstileResult = await verifyTurnstileToken(
+        websiteDetails,
+        emailToSend.turnstileToken,
+        ip
+      );
+      if (!turnstileResult) {
+        throw new Error('failed robots check');
+      }
+
+      const brevoResponse = <BrevoResponse>(
+        await (await sendEmail(emailToSend, websiteDetails)).json()
+      );
+
+      if (!brevoResponse.messageId) {
+        throw new Error('email provider failed to send email');
+      }
 
       return Response.json(
         {
@@ -78,10 +95,10 @@ export class SendEmail extends OpenAPIRoute {
         },
         { status: 200 }
       );
-    } catch (err) {
+    } catch ({ message }) {
       return Response.json(
         {
-          errors: [{ message: err.message }],
+          errors: [{ message }],
           success: false,
           result: {},
         },
