@@ -45,8 +45,8 @@ export class TransactionalEmailBodyBuilder {
     return this;
   }
 
-  public setReplyTo(): TransactionalEmailBodyBuilder {
-    this.replyTo = this.sender;
+  public setReplyTo(sender: Contact): TransactionalEmailBodyBuilder {
+    this.replyTo = sender;
     return this;
   }
 

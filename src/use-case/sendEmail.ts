@@ -12,14 +12,14 @@ export const sendEmail = async (
     new TransactionalEmailBodyBuilder()
       .setSubject(
         getEmailSubject(websiteDetails.websiteName)[websiteDetails.language] ??
-          'website'
+        'website'
       )
       .setSender(
         new ContactBuilder()
           .setName(emailToSend.name)
-          .setEmail(emailToSend.email)
-          .setPhone(emailToSend.phone)
-          .build()
+          // Brevo requires the sender to be whitelisted so it has to be from our domain.
+          .setEmail(`no-reply@${websiteDetails.websiteName}`)
+          .build(),
       )
       .setTo([
         new ContactBuilder()
@@ -27,6 +27,11 @@ export const sendEmail = async (
           .setEmail(websiteDetails.recipientEmail)
           .build(),
       ])
+      .setReplyTo(new ContactBuilder()
+        .setName(emailToSend.name)
+        .setEmail(emailToSend.email)
+        .setPhone(emailToSend.phone)
+        .build())
       .setParams({
         websiteOwnerName: websiteDetails.websiteOwnerName,
         customerName: emailToSend.name,
