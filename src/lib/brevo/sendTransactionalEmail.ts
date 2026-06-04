@@ -1,5 +1,5 @@
 import { BREVO_TRANSACTIONAL_EMAIL_URL } from 'finals';
-import { TransactionalEmailBody } from './types/transactionalEmailBody';
+import type { TransactionalEmailBody } from './types/transactionalEmailBody';
 
 async function gatherResponse(response) {
   const { headers } = response;
@@ -17,7 +17,7 @@ async function gatherResponse(response) {
 
 export const sendTransactionalEmail = async (
   transactionalEmailBody: TransactionalEmailBody,
-  env: any
+  env: Record<string, string>,
 ): Promise<Response> => {
   const init = {
     body: JSON.stringify(transactionalEmailBody),

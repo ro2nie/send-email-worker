@@ -1,31 +1,24 @@
-name: PR Checks
+name: "Pull Request Validation"
 
 on:
   pull_request:
     branches:
-      - master
       - main
 
+permissions:
+  id-token: write
+  contents: write
+
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  install-dependencies:
+    name: 💾 Install Dependencies
+    runs-on: ubuntu-24.04
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: checkout
+        uses: actions/checkout@v6
+      - name: Install Dependencies and pre-cache
+        uses: ./.github/actions/setup-node-pnpm
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile=false
-
-      - name: Run Type Check
-        run: pnpm typecheck
-
-      - name: Run Unit Tests
-        run: pnpm test:unit
+  quality-checks:
+    needs: install-dependencies
+    uses: ./.github/workflows/_quality-checks.yaml

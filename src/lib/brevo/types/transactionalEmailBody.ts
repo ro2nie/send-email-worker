@@ -1,5 +1,5 @@
-import { Contact } from './contact';
-import { Parameters } from './parameters';
+import type { Contact } from './contact';
+import type { Parameters } from './parameters';
 
 export interface TransactionalEmailBody {
   subject: string;

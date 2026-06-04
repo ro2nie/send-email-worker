@@ -1,8 +1,8 @@
-import { WebsiteDetails } from 'types';
+import type { WebsiteDetails } from 'types';
 
 export const getWebsiteDetails = (
-  env: any,
-  websiteName: string
+  env: Record<string, string>,
+  websiteName: string,
 ): WebsiteDetails => {
   return <WebsiteDetails>JSON.parse(env[websiteName]);
 };

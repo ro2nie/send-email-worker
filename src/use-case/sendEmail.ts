@@ -1,18 +1,18 @@
-import { getEmailContent, getEmailSubject } from 'locale/emailLanguage';
 import { sendTransactionalEmail } from 'lib/brevo/sendTransactionalEmail';
 import { ContactBuilder } from 'lib/brevo/types/contact';
 import { TransactionalEmailBodyBuilder } from 'lib/brevo/types/transactionalEmailBody';
-import { EmailDto, WebsiteDetails } from 'types';
+import { getEmailContent, getEmailSubject } from 'locale/emailLanguage';
+import type { EmailDto, WebsiteDetails } from 'types';
 
 export const sendEmail = async (
   emailToSend: EmailDto,
-  websiteDetails: WebsiteDetails
+  websiteDetails: WebsiteDetails,
 ): Promise<Response> => {
   return await sendTransactionalEmail(
     new TransactionalEmailBodyBuilder()
       .setSubject(
         getEmailSubject(websiteDetails.websiteName)[websiteDetails.language] ??
-        'website'
+          'website',
       )
       .setSender(
         new ContactBuilder()
@@ -27,11 +27,13 @@ export const sendEmail = async (
           .setEmail(websiteDetails.recipientEmail)
           .build(),
       ])
-      .setReplyTo(new ContactBuilder()
-        .setName(emailToSend.name)
-        .setEmail(emailToSend.email)
-        .setPhone(emailToSend.phone)
-        .build())
+      .setReplyTo(
+        new ContactBuilder()
+          .setName(emailToSend.name)
+          .setEmail(emailToSend.email)
+          .setPhone(emailToSend.phone)
+          .build(),
+      )
       .setParams({
         websiteOwnerName: websiteDetails.websiteOwnerName,
         customerName: emailToSend.name,
@@ -51,12 +53,12 @@ export const sendEmail = async (
       })
       .setHtmlContent(getEmailContent[websiteDetails.language] ?? 'Error')
       .build(),
-    websiteDetails
+    websiteDetails,
   );
 };
 
 export const validateEmail = (emailToSend: EmailDto) => {
-  if (emailToSend.email != emailToSend.verifyEmail) {
+  if (emailToSend.email !== emailToSend.verifyEmail) {
     throw new Error('Email addresses do not match');
   }
 };

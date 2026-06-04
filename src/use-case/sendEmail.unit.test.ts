@@ -1,7 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { sendEmail, validateEmail } from './sendEmail';
-import { EmailDto, WebsiteDetails } from 'types';
 import * as sendTransactionalEmailModule from 'lib/brevo/sendTransactionalEmail';
+import type { EmailDto, WebsiteDetails } from 'types';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { sendEmail, validateEmail } from './sendEmail';
 
 // Mock the brevo library call
 vi.mock('lib/brevo/sendTransactionalEmail', () => ({
@@ -15,12 +15,20 @@ describe('use-case: sendEmail', () => {
 
   describe('validateEmail', () => {
     it('should throw if emails do not match', () => {
-      const emailDto = { email: 'test@example.com', verifyEmail: 'other@example.com' } as EmailDto;
-      expect(() => validateEmail(emailDto)).toThrowError('Email addresses do not match');
+      const emailDto = {
+        email: 'test@example.com',
+        verifyEmail: 'other@example.com',
+      } as EmailDto;
+      expect(() => validateEmail(emailDto)).toThrowError(
+        'Email addresses do not match',
+      );
     });
 
     it('should not throw if emails match', () => {
-      const emailDto = { email: 'test@example.com', verifyEmail: 'test@example.com' } as EmailDto;
+      const emailDto = {
+        email: 'test@example.com',
+        verifyEmail: 'test@example.com',
+      } as EmailDto;
       expect(() => validateEmail(emailDto)).not.toThrow();
     });
   });
@@ -47,13 +55,19 @@ describe('use-case: sendEmail', () => {
       };
 
       const mockResponse = new Response(JSON.stringify({ messageId: '123' }));
-      vi.mocked(sendTransactionalEmailModule.sendTransactionalEmail).mockResolvedValue(mockResponse);
+      vi.mocked(
+        sendTransactionalEmailModule.sendTransactionalEmail,
+      ).mockResolvedValue(mockResponse);
 
       const result = await sendEmail(emailDto, websiteDetails);
 
-      expect(sendTransactionalEmailModule.sendTransactionalEmail).toHaveBeenCalledTimes(1);
-      
-      const payload = vi.mocked(sendTransactionalEmailModule.sendTransactionalEmail).mock.calls[0][0];
+      expect(
+        sendTransactionalEmailModule.sendTransactionalEmail,
+      ).toHaveBeenCalledTimes(1);
+
+      const payload = vi.mocked(
+        sendTransactionalEmailModule.sendTransactionalEmail,
+      ).mock.calls[0][0];
       expect(payload.sender.email).toBe('no-reply@example.com');
       expect(payload.to[0].email).toBe('owner@example.com');
       expect(payload.replyTo?.email).toBe('test@example.com');

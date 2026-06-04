@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
+import type { WebsiteDetails } from 'types';
+import { describe, expect, it } from 'vitest';
 import { getWebsiteDetails } from './getWebsiteDetails';
-import { WebsiteDetails } from 'types';
 
 describe('getWebsiteDetails', () => {
   it('should parse website details from environment correctly', () => {
