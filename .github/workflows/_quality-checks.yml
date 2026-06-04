@@ -8,26 +8,26 @@ on:
 jobs:
 
   linting:
-    uses: ./.github/workflows/_node_job.yaml
+    uses: ./.github/workflows/_node_job.yml
     with:
       name: 🧹  Linting
       run: pnpm lint
 
   typeCheck:
-    uses: ./.github/workflows/_node_job.yaml
+    uses: ./.github/workflows/_node_job.yml
     with:
       name: 🔍  Type Check
       run: pnpm typecheck
 
   unitTest:
-    uses: ./.github/workflows/_node_job.yaml
+    uses: ./.github/workflows/_node_job.yml
     with:
       name: 🧪  Unit Test
       run: pnpm test:unit
       timeout-minutes: 15
 
   unusedDependencies:
-    uses: ./.github/workflows/_node_job.yaml
+    uses: ./.github/workflows/_node_job.yml
     with:
       name: 📦  Unused Dependencies Check
       run: pnpm dlx knip --include dependencies
