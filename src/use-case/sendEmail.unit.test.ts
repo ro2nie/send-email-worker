@@ -59,7 +59,7 @@ describe('use-case: sendEmail', () => {
         sendTransactionalEmailModule.sendTransactionalEmail,
       ).mockResolvedValue(mockResponse);
 
-      const result = await sendEmail(emailDto, websiteDetails);
+      const result = await sendEmail(emailDto, websiteDetails, 'test-api-key');
 
       expect(
         sendTransactionalEmailModule.sendTransactionalEmail,

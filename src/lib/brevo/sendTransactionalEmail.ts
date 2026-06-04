@@ -17,14 +17,14 @@ async function gatherResponse(response) {
 
 export const sendTransactionalEmail = async (
   transactionalEmailBody: TransactionalEmailBody,
-  env: Record<string, string>,
+  apiKey: string,
 ): Promise<Response> => {
   const init = {
     body: JSON.stringify(transactionalEmailBody),
     method: 'POST',
     headers: {
       'content-type': 'application/json;charset=UTF-8',
-      'api-key': env.brevo,
+      'api-key': apiKey,
     },
   };
   const response = await fetch(BREVO_TRANSACTIONAL_EMAIL_URL, init);

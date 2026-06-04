@@ -2,15 +2,16 @@
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "src",
     "declaration": true,
     "sourceMap": true,
     "esModuleInterop": true,
     "inlineSourceMap": false,
-    "lib": ["esnext"],
+    "lib": [
+      "esnext"
+    ],
     "listEmittedFiles": false,
     "listFiles": false,
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "noFallthroughCasesInSwitch": true,
     "pretty": true,
     "resolveJsonModule": true,
@@ -25,8 +26,18 @@
       "@types/node",
       "@types/service-worker-mock",
       "@cloudflare/workers-types"
-    ]
+    ],
+    "paths": {
+      "*": ["./src/*"]
+    }
   },
-  "exclude": ["node_modules", "dist", "tests"],
-  "include": ["src", "scripts"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "tests"
+  ],
+  "include": [
+    "src",
+    "scripts"
+  ]
 }

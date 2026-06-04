@@ -16,7 +16,7 @@ describe('sendTransactionalEmail', () => {
       htmlContent: '<p>Test</p>',
       subject: 'Test Subject',
     };
-    const mockEnv = { brevo: 'mock-api-key' };
+    const mockApiKey = 'mock-api-key';
 
     fetchSpy.mockResolvedValueOnce({
       headers: new Headers({ 'content-type': 'application/json' }),
@@ -24,7 +24,7 @@ describe('sendTransactionalEmail', () => {
       // biome-ignore lint/suspicious/noExplicitAny: mock
     } as any);
 
-    const response = await sendTransactionalEmail(mockBody, mockEnv);
+    const response = await sendTransactionalEmail(mockBody, mockApiKey);
     const resultText = await response.text();
 
     expect(fetchSpy).toHaveBeenCalledWith(
