@@ -4,6 +4,10 @@
   "private": true,
   "packageManager": "pnpm@11.5.1",
   "type": "module",
+  "engines": {
+    "node": ">=24",
+    "pnpm": ">=11"
+  },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "deploy": "npm run loadsecrets && wrangler deploy",
