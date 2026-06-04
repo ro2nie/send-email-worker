@@ -1,5 +1,6 @@
 import { BREVO_TRANSACTIONAL_EMAIL_URL } from 'finals';
 import type { TransactionalEmailBody } from './types/transactionalEmailBody';
+import { WebsiteDetails } from 'types';
 
 async function gatherResponse(response) {
   const { headers } = response;
@@ -17,18 +18,24 @@ async function gatherResponse(response) {
 
 export const sendTransactionalEmail = async (
   transactionalEmailBody: TransactionalEmailBody,
-  apiKey: string,
+  websiteDetails: WebsiteDetails,
 ): Promise<Response> => {
   const init = {
     body: JSON.stringify(transactionalEmailBody),
     method: 'POST',
     headers: {
       'content-type': 'application/json;charset=UTF-8',
-      'api-key': apiKey,
+      'api-key': websiteDetails.brevo,
     },
   };
-  const response = await fetch(BREVO_TRANSACTIONAL_EMAIL_URL, init);
 
-  const results = await gatherResponse(response);
-  return new Response(results, init);
+  try {
+    const response = await fetch(BREVO_TRANSACTIONAL_EMAIL_URL, init);
+
+    const results = await gatherResponse(response);
+    return new Response(results, init);
+  } catch (err) {
+    console.error('Error:', err.message)
+    throw err
+  }
 };

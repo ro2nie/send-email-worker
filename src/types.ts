@@ -22,7 +22,7 @@ export const EmailDetails = {
   phone: new Regex({ pattern: /^[-\d\s+]{4,20}$/ } as any),
   body: new Regex({
     pattern: /^[.:,?¿!¡\-_\d\s\p{Letter}\p{Mark}]{4,1000}$/gu,
-  // biome-ignore lint/suspicious/noExplicitAny: itty-router-openapi types are incomplete
+    // biome-ignore lint/suspicious/noExplicitAny: itty-router-openapi types are incomplete
   } as any),
   turnstileToken: new Str({ example: 'abc123', required: false }),
 };
@@ -31,9 +31,10 @@ export interface WebsiteDetails {
   websiteName: string;
   websiteOwnerName: string;
   recipientEmail: string;
-  language: 'en-GB' | 'es-ES';
+  language: string;
   turnstileSecret: string;
   timeZone: string;
+  brevo: string;
 }
 
 export interface SiteVerifyResponse {

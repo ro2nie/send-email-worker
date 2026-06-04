@@ -11,6 +11,7 @@ describe('getWebsiteDetails', () => {
       turnstileSecret: 'secret',
       websiteOwnerName: 'Owner',
       timeZone: 'UTC',
+      brevo: 'brevo-api-key',
     };
 
     const env = {

@@ -1,3 +1,7 @@
 name = "send-email-worker"
 main = "src/index.ts"
 compatibility_date = "2023-10-30"
+
+[observability.logs]
+enabled = true
+invocation_logs = true

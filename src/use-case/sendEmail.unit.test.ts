@@ -52,6 +52,7 @@ describe('use-case: sendEmail', () => {
         recipientEmail: 'owner@example.com',
         turnstileSecret: 'secret',
         timeZone: 'UTC',
+        brevo: 'brevo-api-key',
       };
 
       const mockResponse = new Response(JSON.stringify({ messageId: '123' }));
@@ -59,7 +60,7 @@ describe('use-case: sendEmail', () => {
         sendTransactionalEmailModule.sendTransactionalEmail,
       ).mockResolvedValue(mockResponse);
 
-      const result = await sendEmail(emailDto, websiteDetails, 'test-api-key');
+      const result = await sendEmail(emailDto, websiteDetails);
 
       expect(
         sendTransactionalEmailModule.sendTransactionalEmail,
