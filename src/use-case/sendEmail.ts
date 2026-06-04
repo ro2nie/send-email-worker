@@ -7,6 +7,7 @@ import type { EmailDto, WebsiteDetails } from 'types';
 export const sendEmail = async (
   emailToSend: EmailDto,
   websiteDetails: WebsiteDetails,
+  apiKey: string,
 ): Promise<Response> => {
   return await sendTransactionalEmail(
     new TransactionalEmailBodyBuilder()
@@ -53,7 +54,7 @@ export const sendEmail = async (
       })
       .setHtmlContent(getEmailContent[websiteDetails.language] ?? 'Error')
       .build(),
-    websiteDetails,
+    apiKey,
   );
 };
 

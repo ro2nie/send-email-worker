@@ -81,7 +81,7 @@ export class SendEmail extends OpenAPIRoute {
       }
 
       const brevoResponse = <BrevoResponse>(
-        await (await sendEmail(emailToSend, websiteDetails)).json()
+        await (await sendEmail(emailToSend, websiteDetails, env.brevo)).json()
       );
 
       if (!brevoResponse.messageId) {
