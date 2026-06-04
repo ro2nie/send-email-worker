@@ -21,6 +21,6 @@ router.all('*', () =>
   )
 );
 
-export default {
+export default <any>{
   fetch: router.handle,
 };
