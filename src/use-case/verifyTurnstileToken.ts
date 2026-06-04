@@ -1,11 +1,10 @@
-
 import { TURNSTILE_VERIFY_URL } from 'finals';
-import { SiteVerifyResponse, WebsiteDetails } from 'types';
+import type { SiteVerifyResponse, WebsiteDetails } from 'types';
 
 export const verifyTurnstileToken = async (
   websiteDetails: WebsiteDetails,
   turnstileToken: string,
-  ip: string
+  ip: string,
 ): Promise<boolean> => {
   const siteSecret = websiteDetails.turnstileSecret;
 

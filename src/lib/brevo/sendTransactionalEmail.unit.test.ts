@@ -1,6 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { sendTransactionalEmail } from './sendTransactionalEmail';
-import { TransactionalEmailBody } from './types/transactionalEmailBody';
+import type { TransactionalEmailBody } from './types/transactionalEmailBody';
 
 const fetchSpy = vi.spyOn(globalThis, 'fetch');
 
@@ -21,19 +21,23 @@ describe('sendTransactionalEmail', () => {
     fetchSpy.mockResolvedValueOnce({
       headers: new Headers({ 'content-type': 'application/json' }),
       json: async () => ({ messageId: '12345' }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock
     } as any);
 
     const response = await sendTransactionalEmail(mockBody, mockEnv);
     const resultText = await response.text();
 
-    expect(fetchSpy).toHaveBeenCalledWith('https://api.brevo.com/v3/smtp/email', {
-      body: JSON.stringify(mockBody),
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json;charset=UTF-8',
-        'api-key': 'mock-api-key',
+    expect(fetchSpy).toHaveBeenCalledWith(
+      'https://api.brevo.com/v3/smtp/email',
+      {
+        body: JSON.stringify(mockBody),
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json;charset=UTF-8',
+          'api-key': 'mock-api-key',
+        },
       },
-    });
+    );
     expect(resultText).toBe(JSON.stringify({ messageId: '12345' }));
   });
 });

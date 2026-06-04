@@ -1,11 +1,11 @@
 import {
   OpenAPIRoute,
-  OpenAPIRouteSchema,
+  type OpenAPIRouteSchema,
 } from '@cloudflare/itty-router-openapi';
-import { EmailDto, EmailDetails, BrevoResponse } from '../types';
-import { sendEmail, validateEmail } from 'use-case/sendEmail';
 import { getWebsiteDetails } from 'use-case/getWebsiteDetails';
+import { sendEmail, validateEmail } from 'use-case/sendEmail';
 import { verifyTurnstileToken } from 'use-case/verifyTurnstileToken';
+import { type BrevoResponse, EmailDetails, type EmailDto } from '../types';
 
 export class SendEmail extends OpenAPIRoute {
   static schema: OpenAPIRouteSchema = {
@@ -27,9 +27,9 @@ export class SendEmail extends OpenAPIRoute {
 
   async handle(
     request: Request,
-    env: any,
-    context: any,
-    data: Record<string, any>
+    env: Record<string, string>,
+    _context: unknown,
+    data: Record<string, unknown>,
   ) {
     const emailToSend = <EmailDto>data.body;
 
@@ -49,7 +49,7 @@ export class SendEmail extends OpenAPIRoute {
           success: false,
           result: {},
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -63,7 +63,7 @@ export class SendEmail extends OpenAPIRoute {
           success: false,
           result: {},
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -74,7 +74,7 @@ export class SendEmail extends OpenAPIRoute {
       const turnstileResult = await verifyTurnstileToken(
         websiteDetails,
         emailToSend.turnstileToken,
-        ip
+        ip,
       );
       if (!turnstileResult) {
         throw new Error('failed robots check');
@@ -93,7 +93,7 @@ export class SendEmail extends OpenAPIRoute {
           success: true,
           email: emailToSend,
         },
-        { status: 200 }
+        { status: 200 },
       );
     } catch ({ message }) {
       return Response.json(
@@ -102,7 +102,7 @@ export class SendEmail extends OpenAPIRoute {
           success: false,
           result: {},
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
   }

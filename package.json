@@ -13,16 +13,20 @@
     "test:unit": "vitest run",
     "test:unit:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "upgrade": "pnpm run upgrade"
+    "upgrade": "pnpm run upgrade",
+    "lint": "biome check --linter-enabled=true --formatter-enabled=false .",
+    "lint:fix": "biome check --linter-enabled=true --formatter-enabled=true --write ."
   },
   "dependencies": {
     "@cloudflare/itty-router-openapi": "1.1.1"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.4.16",
     "@cloudflare/workers-types": "4.20260603.1",
     "@types/node": "25.9.1",
     "@types/service-worker-mock": "2.0.4",
     "typescript": "6.0.3",
+    "vite": "8.0.16",
     "vite-tsconfig-paths": "6.1.1",
     "vitest": "4.1.8",
     "wrangler": "4.97.0"

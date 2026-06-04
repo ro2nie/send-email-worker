@@ -17,10 +17,11 @@ router.all('*', () =>
       success: false,
       error: 'Route not found',
     },
-    { status: 404 }
-  )
+    { status: 404 },
+  ),
 );
 
-export default <any>{
+// biome-ignore lint/suspicious/noExplicitAny: router.handle type does not perfectly match ExportedHandler
+export default (<any>{
   fetch: router.handle,
-};
+});
