@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260331.1",
-    "@types/node": "^25.5.0",
+    "@types/node": "^20.19.27",
     "@types/service-worker-mock": "^2.0.4",
     "vitest": "^1.6.0",
     "vite-tsconfig-paths": "^4.3.2",
