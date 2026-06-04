@@ -21,7 +21,7 @@
     "@types/service-worker-mock": "^2.0.4",
     "vitest": "^1.6.0",
     "vite-tsconfig-paths": "^4.3.2",
-    "wrangler": "^4.79.0",
+    "wrangler": "^4.56.0",
     "typescript": "^5.4.5"
   }
 }

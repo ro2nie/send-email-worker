@@ -31,7 +31,7 @@ importers:
         specifier: ^1.6.0
         version: 1.6.1(@types/node@25.5.0)
       wrangler:
-        specifier: ^4.79.0
+        specifier: ^4.56.0
         version: 4.79.0(@cloudflare/workers-types@4.20260331.1)
 
 packages:
