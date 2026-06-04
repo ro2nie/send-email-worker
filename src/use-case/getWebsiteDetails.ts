@@ -19,4 +19,3 @@ export const getWebsiteDetails = (
     throw new Error('Failed to parse website details');
   }
 };
-
