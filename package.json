@@ -2,26 +2,29 @@
   "name": "cloudflare-workers-openapi",
   "version": "0.0.1",
   "private": true,
+  "packageManager": "pnpm@11.5.1",
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "deploy": "npm run loadsecrets && wrangler deploy",
     "dev": "wrangler dev",
     "start": "wrangler dev",
     "loadsecrets": "wrangler secret bulk secrets.json",
     "test:unit": "vitest run",
     "test:unit:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "upgrade": "pnpm run upgrade"
   },
   "dependencies": {
-    "@cloudflare/itty-router-openapi": "^1.1.1"
+    "@cloudflare/itty-router-openapi": "1.1.1"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20260331.1",
-    "@types/node": "^25.5.0",
-    "@types/service-worker-mock": "^2.0.4",
-    "vitest": "^1.6.0",
-    "vite-tsconfig-paths": "^4.3.2",
-    "wrangler": "^4.79.0",
-    "typescript": "^5.4.5"
+    "@cloudflare/workers-types": "4.20260603.1",
+    "@types/node": "25.9.1",
+    "@types/service-worker-mock": "2.0.4",
+    "typescript": "6.0.3",
+    "vite-tsconfig-paths": "6.1.1",
+    "vitest": "4.1.8",
+    "wrangler": "4.97.0"
   }
 }

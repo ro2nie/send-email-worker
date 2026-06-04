@@ -5,6 +5,7 @@
   ],
   "minimumReleaseAge": "5 days",
   "internalChecksFilter": "strict",
+  "rangeStrategy": "replace",
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch"],
