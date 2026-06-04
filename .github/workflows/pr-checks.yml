@@ -22,4 +22,4 @@ jobs:
 
   quality-checks:
     needs: install-dependencies
-    uses: ./.github/workflows/_quality-checks.yaml
+    uses: ./.github/workflows/_quality-checks.yml
