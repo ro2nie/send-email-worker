@@ -19,7 +19,7 @@
     "@cloudflare/workers-types": "^4.20260331.1",
     "@types/node": "^25.5.0",
     "@types/service-worker-mock": "^2.0.4",
-    "vitest": "^1.6.0",
+    "vitest": "^4.1.0",
     "vite-tsconfig-paths": "^4.3.2",
     "wrangler": "^4.79.0",
     "typescript": "^5.4.5"
