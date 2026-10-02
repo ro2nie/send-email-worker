@@ -25,14 +25,14 @@
     "@cloudflare/itty-router-openapi": "1.1.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.16",
-    "@cloudflare/workers-types": "4.20260603.1",
-    "@types/node": "25.9.1",
+    "@biomejs/biome": "2.5.15",
+    "@cloudflare/workers-types": "5.20261001.1",
+    "@types/node": "26.6.3",
     "@types/service-worker-mock": "2.0.4",
-    "typescript": "6.0.3",
-    "vite": "8.0.16",
+    "typescript": "7.0.2",
+    "vite": "8.3.2",
     "vite-tsconfig-paths": "6.1.1",
-    "vitest": "4.1.8",
-    "wrangler": "4.97.0"
+    "vitest": "5.0.3",
+    "wrangler": "4.146.0"
   }
 }

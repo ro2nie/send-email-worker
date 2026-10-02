@@ -1,6 +1,6 @@
 import { BREVO_TRANSACTIONAL_EMAIL_URL } from 'finals';
+import type { WebsiteDetails } from 'types';
 import type { TransactionalEmailBody } from './types/transactionalEmailBody';
-import { WebsiteDetails } from 'types';
 
 async function gatherResponse(response) {
   const { headers } = response;
@@ -35,7 +35,7 @@ export const sendTransactionalEmail = async (
     const results = await gatherResponse(response);
     return new Response(results, init);
   } catch (err) {
-    console.error('Error:', err.message)
-    throw err
+    console.error('Error:', err.message);
+    throw err;
   }
 };

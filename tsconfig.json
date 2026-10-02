@@ -6,9 +6,7 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "inlineSourceMap": false,
-    "lib": [
-      "esnext"
-    ],
+    "lib": ["esnext"],
     "listEmittedFiles": false,
     "listFiles": false,
     "moduleResolution": "Bundler",
@@ -31,13 +29,6 @@
       "*": ["./src/*"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "tests"
-  ],
-  "include": [
-    "src",
-    "scripts"
-  ]
+  "exclude": ["node_modules", "dist", "tests"],
+  "include": ["src", "scripts"]
 }
