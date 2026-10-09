@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",
-    "@cloudflare/workers-types": "5.20261003.1",
+    "@cloudflare/workers-types": "5.20261004.1",
     "@types/node": "26.6.4",
     "@types/service-worker-mock": "2.0.4",
     "typescript": "7.0.2",
