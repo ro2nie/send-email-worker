@@ -16,8 +16,8 @@ importers:
         specifier: 2.5.15
         version: 2.5.15
       '@cloudflare/workers-types':
-        specifier: 5.20261014.1
-        version: 5.20261014.1
+        specifier: 5.20261015.1
+        version: 5.20261015.1
       '@types/node':
         specifier: 26.6.5
         version: 26.6.5
@@ -38,7 +38,7 @@ importers:
         version: 5.0.4(@types/node@26.6.5)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(yaml@2.9.1))
       wrangler:
         specifier: 4.151.0
-        version: 4.151.0(@cloudflare/workers-types@5.20261014.1)(@types/node@26.6.5)
+        version: 4.151.0(@cloudflare/workers-types@5.20261015.1)(@types/node@26.6.5)
 
 packages:
 
@@ -150,8 +150,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@cloudflare/workers-types@5.20261014.1':
-    resolution: {integrity: sha512-eGvDG17vu/BmQPOGWFgG1M7iPnW3c17Ykf2qi80JBkPI9f/GYl+5IC2XnZfrwf/CQXZICFgyX/l0+pc1bLbp+g==}
+  '@cloudflare/workers-types@5.20261015.1':
+    resolution: {integrity: sha512-ef6KOceBMzxf1O/CelPF2ei8Mtlaw+7vQ9cdaUKFG8CC0xAe8/SuPdRpmbogEE18u6JbfFWWAOGQLaav8UTFWg==}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -1227,7 +1227,7 @@ snapshots:
   '@cloudflare/workerd-windows-64@1.20261012.1':
     optional: true
 
-  '@cloudflare/workers-types@5.20261014.1': {}
+  '@cloudflare/workers-types@5.20261015.1': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -1914,7 +1914,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20261012.1
       '@cloudflare/workerd-windows-64': 1.20261012.1
 
-  wrangler@4.151.0(@cloudflare/workers-types@5.20261014.1)(@types/node@26.6.5):
+  wrangler@4.151.0(@cloudflare/workers-types@5.20261015.1)(@types/node@26.6.5):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.5.0
       '@cloudflare/unenv-preset': 2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261012.1)
@@ -1925,7 +1925,7 @@ snapshots:
       unenv: 2.0.0-rc.24
       workerd: 1.20261012.1
     optionalDependencies:
-      '@cloudflare/workers-types': 5.20261014.1
+      '@cloudflare/workers-types': 5.20261015.1
       fsevents: 2.3.3
     transitivePeerDependencies:
       - '@types/node'
