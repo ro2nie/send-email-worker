@@ -25,7 +25,7 @@
     "@cloudflare/itty-router-openapi": "1.1.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.15",
+    "@biomejs/biome": "2.6.2",
     "@cloudflare/workers-types": "5.20261021.1",
     "@types/node": "26.6.5",
     "@types/service-worker-mock": "2.0.4",
