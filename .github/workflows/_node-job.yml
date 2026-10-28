@@ -17,7 +17,7 @@ jobs:
     name: ${{inputs.name}}
     permissions:
       contents: read
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: ${{inputs.timeout-minutes}}
     env:
       GITHUB_TOKEN: ${{ github.token }}
