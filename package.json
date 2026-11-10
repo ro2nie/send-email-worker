@@ -30,7 +30,7 @@
     "@types/node": "26.6.6",
     "@types/service-worker-mock": "2.0.4",
     "typescript": "7.0.2",
-    "vite": "8.3.5",
+    "vite": "8.3.6",
     "vite-tsconfig-paths": "6.1.1",
     "vitest": "5.1.0",
     "wrangler": "4.157.0"
